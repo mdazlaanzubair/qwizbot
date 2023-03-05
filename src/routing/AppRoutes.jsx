@@ -10,7 +10,7 @@ const AppRoutes = () => {
     {
       path: "/",
       element: (
-        <div className="App font-default">
+        <div className="font-default">
           <h1>Vite + React</h1>
           <p className="read-the-docs">
             Click on the Vite and React logos to learn more
@@ -19,7 +19,11 @@ const AppRoutes = () => {
       ),
     },
   ]);
-  return <RouterProvider router={routerList} />;
+  return (
+    <div className="container">
+      <RouterProvider router={routerList} />
+    </div>
+  );
 };
 
 export default AppRoutes;

@@ -2,24 +2,34 @@ import { Link } from "react-router-dom";
 
 const NotFound = () => {
   return (
-    <>
-      {/* <!-- component --> */}
-      <main className="h-screen w-full flex flex-col justify-center items-center bg-gray-700">
-        <h1 className="text-9xl font-extrabold text-white tracking-widest">404</h1>
-        <div className="bg-[#FF6A3D] px-2 text-sm rounded rotate-12 absolute">
-          Page Not Found
+    <div className="hero min-h-screen bg-base-200">
+      <div className="hero-content text-center">
+        <div className="max-w-md">
+          <h1 className="text-5xl font-bold">Page Not Found</h1>
+          <p className="py-6">
+            Seems like you are navigating towards wrong direction. Requested
+            page is not available, you should go back to the main site.
+          </p>
+          <Link to="/" className="btn btn-link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6 mr-2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+              />
+            </svg>
+            Go Back
+          </Link>
         </div>
-        <button className="mt-5">
-          <a className="relative inline-block text-sm font-medium text-[#FF6A3D] group active:text-orange-500 focus:outline-none focus:ring">
-            <span className="absolute inset-0 transition-transform translate-x-0.5 translate-y-0.5 bg-[#FF6A3D] group-hover:translate-y-0 group-hover:translate-x-0"></span>
-
-            <span className="relative block px-8 py-3 bg-gray-700 border border-current">
-              <Link to="/">Go Home</Link>
-            </span>
-          </a>
-        </button>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 
