@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
+import Signup from "../pages/Signup";
 
 const AppRoutes = () => {
   const routerList = createBrowserRouter([
@@ -8,7 +10,15 @@ const AppRoutes = () => {
       element: <NotFound />,
     },
     {
-      path: "/",
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
+    },
+    {
+      path: "/home",
       element: (
         <div className="font-default">
           <h1>Vite + React</h1>
