@@ -1,18 +1,35 @@
 import { Link, useNavigate } from "react-router-dom";
+import { BsGoogle, BsGithub, BsDiscord } from "react-icons/bs";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { useAppContext } from "../contexts/AppContext";
+import {
+  supaLoginProvider,
+  supaRegister,
+} from "../helpers/functions/authenticator";
 
 const Signup = () => {
+  // invoking navigation function
+  const navigate = useNavigate();
+
   // redirect user if already logged-in
-  const navigator = useNavigate();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  console.log(user);
+  useEffect(() => {
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, []);
+
+  // grabbing global state for processing / loading
+  const { isLoading, setIsLoading } = useAppContext();
 
   // show / hide password state
-  const [show, setShow] = useState(false);  
+  const [show, setShow] = useState(false);
 
   // schema for signup form with custom error messages
   const signUpSchema = yup.object().shape({
@@ -45,28 +62,86 @@ const Signup = () => {
     resolver: yupResolver(signUpSchema),
   });
 
-  // signup function
-  const signup = (formData) => {
-    console.log(formData.name);
-    // checking errors
+  // user account creation function
+  const signup = async (formData) => {
+    // changing loading state
+    setIsLoading(true);
+
+    // creating user payload to be submitted on supabase
+    const userPayload = {
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          name: formData.name,
+        },
+      },
+    };
+
+    // calling registering user to supabase
+    const { data, error } = await supaRegister(userPayload);
+
+    // on successful registration
+    if (data.user) {
+      // setting user in global context state
+      setUser(data);
+
+      // troastifying alerts
+      toast.success("You're successfully logged in!");
+
+      // navigate user to the dashboard
+      navigate("/dashboard");
+    }
+
+    // troastifying error (if any)
+    if (error) {
+      toast.error(error.message, {
+        position: "top-center",
+      });
+    }
+
+    // changing loading state
+    setIsLoading(false);
   };
 
-  // checking auth state of user when the component loads
-  useEffect(() => {
-    user ? navigator("/") : navigator("/signup");
-  }, []);
-
   return (
-    <div className="hero min-h-screen bg-base-200 py-20">
-      <div className="hero-content flex-col lg:flex-row">
+    <div className="hero min-h-screen bg-base-200">
+      <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Ready to explore?</h1>
           <p className="py-6">
             Join us and experience the full potential of our platform by signing
             up today!
           </p>
+          <div className="divider pb-6">OR</div>
+          <div className="grid grid-cols-1 gap-3">
+            <button
+              type="button"
+              className="btn btn-neutral btn-block"
+              onClick={() => supaLoginProvider("google")}
+            >
+              <BsGoogle size={25} className="mr-3" />
+              Login with Google
+            </button>
+            <button
+              type="button"
+              className="btn btn-neutral btn-block"
+              onClick={() => supaLoginProvider("github")}
+            >
+              <BsGithub size={25} className="mr-3" />
+              Login with Github
+            </button>
+            <button
+              type="button"
+              className="btn btn-neutral btn-block"
+              onClick={() => supaLoginProvider("discord")}
+            >
+              <BsDiscord size={25} className="mr-3" />
+              Login with Discord
+            </button>
+          </div>
         </div>
-        <div className="w-full max-w-sm card shadow-2xl bg-base-100">
+        <div className="w-full lg:max-w-sm card shadow-2xl bg-base-100">
           <form className="card-body" onSubmit={handleSubmit(signup)}>
             <div className="form-control">
               <label className="label">
@@ -154,9 +229,15 @@ const Signup = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button type="submit" className="btn btn-primary">
-                Signup
-              </button>
+              {isLoading ? (
+                <button type="button" className="btn loading">
+                  Processing
+                </button>
+              ) : (
+                <button type="submit" className="btn btn-primary">
+                  Signup
+                </button>
+              )}
             </div>
             <div className="form-control mt-3 text-sm flex flex-row justify-around">
               Already have an account?{" "}

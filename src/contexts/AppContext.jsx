@@ -6,9 +6,9 @@ export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [theme, setTheme] = useState("night");
+  const [isDarkModeOn, setIsDarkModeOn] = useState(true);
 
-  const value = { isLoading, setIsLoading, theme, setTheme };
+  const value = { isLoading, setIsLoading, isDarkModeOn, setIsDarkModeOn };
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 

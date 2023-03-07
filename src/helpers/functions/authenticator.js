@@ -3,22 +3,14 @@ import { supabase } from "./supaConfig";
 // this file that contain all the function of supabase
 
 // 1. FUNCTION - Signup
-export const supaRegister = async (email, password) => {
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-  });
-
+export const supaRegister = async (payload) => {
+  const { data, error } = await supabase.auth.signUp(payload);
   return { data, error };
 };
 
 // 2. FUNCTION - Regular Login
-export const supaLogin = async (email, password) => {
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
-
+export const supaLogin = async (payload) => {
+  const { data, error } = await supabase.auth.signInWithPassword(payload);
   return { data, error };
 };
 
@@ -45,15 +37,4 @@ export const supaGetUser = async () => {
   } = await supabase.auth.getUser();
 
   return data.user;
-};
-
-// 6. FUNCTION - Listening to auth events (if logged-in or out)
-export const supaCheckUser = async () => {
-  supabase.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_IN") {
-      return session.user;
-    } else {
-      return null;
-    }
-  });
 };

@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Signup from "../pages/Signup";
@@ -17,7 +18,7 @@ const AppRoutes = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route element={<RoutesProtector user={user} />}>
-          <Route path="/dashboard" element={<h1>Dashboard Page</h1>} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Route>
         <Route path="/home" element={<h1>Landing Page</h1>} />
       </Routes>
