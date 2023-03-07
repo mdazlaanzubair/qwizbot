@@ -1,38 +1,27 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Signup from "../pages/Signup";
+import RoutesProtector from "./RoutesProtector";
 
 const AppRoutes = () => {
-  const routerList = createBrowserRouter([
-    {
-      path: "/*",
-      element: <NotFound />,
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/signup",
-      element: <Signup />,
-    },
-    {
-      path: "/home",
-      element: (
-        <div className="font-default">
-          <h1>Vite + React</h1>
-          <p className="read-the-docs">
-            Click on the Vite and React logos to learn more
-          </p>
-        </div>
-      ),
-    },
-  ]);
+  // grabbing user (if any) for protected routes
+  const { user } = useAuth();
+
   return (
-    <div className="container">
-      <RouterProvider router={routerList} />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<h1>Landing Page</h1>} exact />
+        <Route path="/*" element={<NotFound />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route element={<RoutesProtector user={user} />}>
+          <Route path="/dashboard" element={<h1>Dashboard Page</h1>} />
+        </Route>
+        <Route path="/home" element={<h1>Landing Page</h1>} />
+      </Routes>
+    </Router>
   );
 };
 

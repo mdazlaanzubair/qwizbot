@@ -8,7 +8,7 @@ function App() {
   return (
     <div
       id="App"
-      className="App main-website-holder m-0 p-20 font-default"
+      className="App main-website-holder m-0 p-20 min-h-screen font-default"
       data-theme={theme}
     >
       <AppRoutes />

@@ -1,19 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
+import { BsGoogle, BsGithub, BsDiscord } from "react-icons/bs";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { supabase } from "../helpers/functions/supaConfig";
-import useRedirectUser from "../helpers/functions/useRedirectUser";
+import { useEffect } from "react";
+import { supaLoginProvider } from "../helpers/functions/authenticator";
+import { useAuth } from "../contexts/AuthContext";
 
 const Login = () => {
-  // redirecting user based on authentication status
-  // invoking navigator
+  // redirect user if already logged-in
   const navigator = useNavigate();
-
-  // redirect user based on authentication status
-  supabase.auth.onAuthStateChange((event, session) => {
-    if (event == "SIGNED_OUT") console.log("SIGNED_OUT", session);
-  });
+  const { user } = useAuth();
 
   // schema for login form with custom error messages
   const loginSchema = yup.object().shape({
@@ -44,14 +42,46 @@ const Login = () => {
     // checking errors
   };
 
+  // checking auth state of user when the component loads
+  useEffect(() => {
+    user ? navigator("/") : navigator("/login");
+  }, []);
+
   return (
     <div className="hero min-h-screen bg-base-200 py-20">
       <div className="hero-content flex-col lg:flex-row">
-        <div className="text-center lg:text-left">
+        <div className="text-center lg:text-left lg:mx-10">
           <h1 className="text-5xl font-bold">Welcome back!</h1>
           <p className="py-6">
             Glad to see you again. Now Login to access the Power of AI.
           </p>
+          <div className="divider pb-6">OR</div>
+          <div className="grid grid-cols-1 gap-3">
+            <button
+              type="button"
+              className="btn btn-neutral btn-block btn-lg text-xs"
+              onClick={() => supaLoginProvider("google")}
+            >
+              <BsGoogle size={20} className="mr-2" />
+              Login with Google
+            </button>
+            <button
+              type="button"
+              className="btn btn-neutral btn-block btn-lg text-xs"
+              onClick={() => supaLoginProvider("github")}
+            >
+              <BsGithub size={20} className="mr-2" />
+              Login with Github
+            </button>
+            <button
+              type="button"
+              className="btn btn-neutral btn-block btn-lg text-xs"
+              onClick={() => supaLoginProvider("discord")}
+            >
+              <BsDiscord size={20} className="mr-2" />
+              Login with Discord
+            </button>
+          </div>
         </div>
         <div className="w-full max-w-sm card shadow-2xl bg-base-100">
           <form className="card-body" onSubmit={handleSubmit(login)}>

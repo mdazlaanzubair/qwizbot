@@ -1,13 +1,18 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const Signup = () => {
+  // redirect user if already logged-in
+  const navigator = useNavigate();
+  const { user } = useAuth();
+
   // show / hide password state
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);  
 
   // schema for signup form with custom error messages
   const signUpSchema = yup.object().shape({
@@ -45,6 +50,11 @@ const Signup = () => {
     console.log(formData.name);
     // checking errors
   };
+
+  // checking auth state of user when the component loads
+  useEffect(() => {
+    user ? navigator("/") : navigator("/signup");
+  }, []);
 
   return (
     <div className="hero min-h-screen bg-base-200 py-20">

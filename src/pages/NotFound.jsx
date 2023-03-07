@@ -1,6 +1,11 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const NotFound = () => {
+  const { user } = useAuth();
+  useEffect(() => console.log(user), []);
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content text-center">
