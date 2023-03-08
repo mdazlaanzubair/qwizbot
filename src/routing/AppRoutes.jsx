@@ -17,9 +17,14 @@ const AppRoutes = () => {
         <Route path="/*" element={<NotFound />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route element={<RoutesProtector user={user} />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="login" element={<h1>QnA</h1>} />
+          <Route path="login" element={<h1>QnA</h1>} />
+          <Route path="login" element={<h1>QnA</h1>} />
         </Route>
+        {/* <Route element={<RoutesProtector user={user} />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route> */}
         <Route path="/home" element={<h1>Landing Page</h1>} />
       </Routes>
     </Router>
