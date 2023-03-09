@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "../components/layout/Header";
 import { useAuth } from "../contexts/AuthContext";
 import Dashboard from "../pages/Dashboard";
+import Home from "../pages/Home";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import Signup from "../pages/Signup";
@@ -12,20 +14,18 @@ const AppRoutes = () => {
 
   return (
     <Router>
+      {/* header */}
+      <Header />
+
+      {/* routes */}
       <Routes>
-        <Route path="/" element={<h1>Landing Page</h1>} exact />
+        <Route path="/" element={<Home />} exact />
         <Route path="/*" element={<NotFound />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="login" element={<h1>QnA</h1>} />
-          <Route path="login" element={<h1>QnA</h1>} />
-          <Route path="login" element={<h1>QnA</h1>} />
-        </Route>
-        {/* <Route element={<RoutesProtector user={user} />}>
+        <Route element={<RoutesProtector user={user} />}>
           <Route path="/dashboard" element={<Dashboard />} />
-        </Route> */}
-        <Route path="/home" element={<h1>Landing Page</h1>} />
+        </Route>
       </Routes>
     </Router>
   );

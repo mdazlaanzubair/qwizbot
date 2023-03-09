@@ -5,7 +5,11 @@ const ThemeToggler = () => {
 
   return (
     <div className="absolute top-1 right-1">
-      <button type="button" className="btn btn-circle btn-ghost text-primary">
+      <button
+        type="button"
+        className="btn btn-circle btn-ghost text-primary"
+        onClick={() => setIsDarkModeOn(!isDarkModeOn)}
+      >
         {isDarkModeOn ? (
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -14,7 +18,6 @@ const ThemeToggler = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-6 h-6 cursor-pointer shadow-lg"
-            onClick={() => setIsDarkModeOn(false)}
           >
             <path
               strokeLinecap="round"
@@ -30,7 +33,6 @@ const ThemeToggler = () => {
             strokeWidth={1.5}
             stroke="currentColor"
             className="w-6 h-6 cursor-pointer"
-            onClick={() => setIsDarkModeOn(true)}
           >
             <path
               strokeLinecap="round"

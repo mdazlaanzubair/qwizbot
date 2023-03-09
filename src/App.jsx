@@ -1,3 +1,4 @@
+import Header from "./components/layout/Header";
 import { useAppContext } from "./contexts/AppContext";
 import ThemeToggler from "./helpers/components/ThemeToggler";
 import Toaster from "./helpers/components/Toaster";
