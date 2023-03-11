@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-export const getAnswer = async (
+export const talkToGpt = async (
   prompt,
   model = "text-davinci-003",
   max_tokens = 100

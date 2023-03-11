@@ -3,11 +3,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAppContext } from "../../contexts/AppContext";
 import { useQnaContext } from "../../contexts/QnaContext";
-import { getAnswer } from "../../helpers/functions/openAiHelper";
+import { talkToGpt } from "../../helpers/functions/openAiHelper";
 
 const QuestionForm = () => {
   // getting global answer state
-  const { setAnswer, qnas, setQnas } = useQnaContext();
+  const { qnas, setQnas } = useQnaContext();
 
   // grabbing global state for processing / loading
   const { setIsLoading } = useAppContext();
@@ -35,9 +35,10 @@ const QuestionForm = () => {
     setIsLoading(true);
 
     // using ai helper to get answer
-    const answer = await getAnswer(formData.question);
+    const answer = await talkToGpt(
+      `Answer the following question: \n${formData.question}`
+    );
     setQnas([{ q: formData.question, a: answer }, ...qnas]);
-    setAnswer(answer);
 
     // changing loading state
     setIsLoading(false);

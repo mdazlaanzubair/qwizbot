@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
+import * as FontAwesome from "react-icons/fa";
+import React from "react";
 
-const ServiceCard = ({ service, index }) => {
+const ServiceCard = ({ service }) => {
+  const icon = React.createElement(
+    FontAwesome[service.icon]
+  );
+
   return (
-    <div
-      className={`card border border-neutral-focus border-opacity-5 hover:bg-neutral hover:text-neutral-content hover:shadow-xl hover:shadow-neutral transition-all ease-in-out duration-300 ${
-        service.url !== "/qna" ? "blur-sm" : ""
-      }`}
-    >
+    <div className="card border border-neutral-focus border-opacity-5 hover:bg-neutral hover:text-neutral-content hover:shadow-xl hover:shadow-neutral transition-all ease-in-out duration-300">
       <div className="card-head text-center pt-5">
         <div className="avatar placeholder">
-          <div className="bg-base-300 text-base-content rounded-full w-12">
-            <span>{index + 1}</span>
+          <div className="border-2 border-primary text-primary-focus rounded-full p-5">
+            <span className="text-4xl">{icon}</span>
           </div>
         </div>
       </div>
@@ -25,13 +27,9 @@ const ServiceCard = ({ service, index }) => {
           ))}
         </p>
         <div className="card-actions justify-end">
-          {service.url === "/qna" ? (
-            <Link to={service?.url} className="btn btn-sm btn-ghost">
-              Try it out!
-            </Link>
-          ) : (
-            ""
-          )}
+          <Link to={service?.url} className="btn btn-sm btn-link normal-case">
+            Try me out!
+          </Link>
         </div>
       </div>
     </div>

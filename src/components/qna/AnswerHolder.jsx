@@ -1,10 +1,11 @@
 import { useQnaContext } from "../../contexts/QnaContext";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { useAppContext } from "../../contexts/AppContext";
+import { toast } from "react-toastify";
 
 const AnswerHolder = () => {
   // getting global answer state
-  const { answer, qnas } = useQnaContext();
+  const { qnas } = useQnaContext();
 
   // grabbing global state for processing / loading
   const { isLoading } = useAppContext();
@@ -22,8 +23,8 @@ const AnswerHolder = () => {
         </div>
       </div>
     </div>
-  ) : answer !== "" && qnas.length > 0 && !isLoading ? (
-    qnas.map((qna,index) => (
+  ) : qnas.length > 0 && !isLoading ? (
+    qnas.map((qna, index) => (
       <div key={index} className="alert shadow-lg items-start mb-5">
         <div>
           <div>
@@ -31,14 +32,11 @@ const AnswerHolder = () => {
             <div className="text-xs">{qna.a}</div>
           </div>
         </div>
-        <div
-          className="flex-none tooltip tooltip-primary"
-          data-tip="Copy to clipboard"
-        >
+        <div className="flex-none">
           <button className="btn btn-sm btn-square btn-primary">
             <CopyToClipboard
               text={qna.a}
-              onCopy={() => console.log("Copied:", qna.a)}
+              onCopy={() => toast.info("Answer copied!")}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
