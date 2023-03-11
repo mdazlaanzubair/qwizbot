@@ -6,7 +6,7 @@ export const useTextTranslationContext = () =>
   useContext(TextTranslationContext);
 
 const TextTranslationProvider = ({ children }) => {
-  const [translatedText, setTranslatedText] = useState("");
+  const [translatedText, setTranslatedText] = useState([]);
 
   const value = { translatedText, setTranslatedText };
   return (

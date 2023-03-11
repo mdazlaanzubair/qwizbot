@@ -3,6 +3,7 @@ import Header from "../components/layout/Header";
 import { useAuth } from "../contexts/AuthContext";
 import GrammarProvider from "../contexts/GrammarContext";
 import QnaProvider from "../contexts/QnaContext";
+import TextTranslationProvider from "../contexts/TextTranslationContext";
 import Dashboard from "../pages/Dashboard";
 import GrammarCheck from "../pages/GrammarCheck";
 import Home from "../pages/Home";
@@ -50,9 +51,9 @@ const AppRoutes = () => {
         <Route
           path="/translate_text"
           element={
-            <GrammarProvider>
+            <TextTranslationProvider>
               <TranslateText />
-            </GrammarProvider>
+            </TextTranslationProvider>
           }
         />
       </Routes>

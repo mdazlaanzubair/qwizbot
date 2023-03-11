@@ -20,7 +20,7 @@ export const talkToGpt = async (
     presence_penalty: 0,
   });
 
-  return response.data.choices[0].text;
+  return response;
 };
 
 export const codeCompletion = async (

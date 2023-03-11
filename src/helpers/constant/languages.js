@@ -273,4 +273,15 @@ const list_of_languages = [
   },
 ];
 
-export default list_of_languages;
+// creating openings for react select component
+const languageOptions = list_of_languages.map((lang) => {
+  return {
+    label: lang.language,
+    value: {
+      lang: lang.language,
+      country: lang.country,
+    },
+  };
+});
+
+export default languageOptions;

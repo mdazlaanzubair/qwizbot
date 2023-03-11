@@ -1,28 +1,34 @@
 import CopyToClipboard from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { useAppContext } from "../../contexts/AppContext";
-import { useGrammarContext } from "../../contexts/GrammarContext";
+import { useTextTranslationContext } from "../../contexts/TextTranslationContext";
 
-const CorrectedText = () => {
+const ShowTranslation = () => {
   // grabbing global context states
-  const { correctedText } = useGrammarContext();
+  const { translatedText } = useTextTranslationContext();
   const { isLoading } = useAppContext();
 
-  return correctedText.length > 0 || correctedText !== "" ? (
+  return translatedText.length > 0 || translatedText !== "" ? (
     <div className="card w-full">
       <div className="card-body">
-        <h2 className="card-title text-3xl font-bold">Correction Completed</h2>
-        <p className="bg-slate-50 shadow-sm p-3 rounded-box">{correctedText}</p>
-        <div className="card-actions mt-5">
-          <button type="button" className="btn btn-sm btn-ghost normal-case">
+        <h2 className="card-title text-3xl font-bold">Translated Text</h2>
+        {translatedText.map((text, index) =>
+          text.length > 3 ? (
             <CopyToClipboard
-              text={correctedText}
+                key={index}
+              text={translatedText}
               onCopy={() => toast.info("Text copied!")}
             >
-              <p>Copy to Clipboard</p>
+              <p
+                className="bg-slate-50 shadow-sm p-3 rounded-box mb-3 hover:bg-slate-200"
+              >
+                {text}
+              </p>
             </CopyToClipboard>
-          </button>
-        </div>
+          ) : (
+            ""
+          )
+        )}
       </div>
     </div>
   ) : isLoading ? (
@@ -41,4 +47,4 @@ const CorrectedText = () => {
   );
 };
 
-export default CorrectedText;
+export default ShowTranslation;
