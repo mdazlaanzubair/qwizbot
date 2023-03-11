@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import servicesList from "../../helpers/constant/services";
 import { supaLogout } from "../../helpers/functions/authenticator";
 
 const Header = () => {
@@ -22,11 +23,16 @@ const Header = () => {
             </label>
             <ul
               tabIndex={0}
-              className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
+              className="mt-3 p-2 shadow menu menu-compact dropdown-content rounded-box w-52 bg-neutral text-neutral-content"
             >
               <li>
                 <Link to="/dashboard">Dashboard</Link>
               </li>
+              {servicesList.map((service, index) => (
+                <li key={index}>
+                  <Link to={service.url}>{service.title}</Link>
+                </li>
+              ))}
               <li>
                 <a onClick={() => supaLogout()}>Logout</a>
               </li>
