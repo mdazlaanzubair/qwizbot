@@ -21,34 +21,11 @@ const servicesList = [
     icon: "FaExchangeAlt",
   },
   {
-    title: "Classification",
-    desc: "Categorize items based on examples provided. Our advanced algorithm will ensure accurate classification.",
-    tags: ["Classification"],
-    icon: "FaGripHorizontal",
-  },
-  {
-    title: "Translate programming languages",
-    desc: "Translate code between programming languages using comments to specify source and target languages.",
-    tags: ["Code", "Translation"],
-    icon: "FaMixer",
-  },
-  {
-    title: "Advanced tweet classifier",
-    desc: "Detect sentiment in status updates using our advanced prompt. Provides sentiment for each status update.",
-    tags: ["Classification"],
-    icon: "FaTwitter",
-  },
-  {
-    title: "Explain Code",
-    desc: "Explain complicated code with our advanced algorithm that provides accurate and easy-to-understand explanations.",
-    tags: ["Code", "Translation"],
-    icon: "FaGraduationCap",
-  },
-  {
     title: "Keywords",
     desc: "Extract keywords from text. Lower temp picks keywords. Higher temp generates related keywords.",
     tags: ["Classification", "Transformation"],
     icon: "FaSlackHash",
+    url: "/keywords",
   },
   {
     title: "Ad from product description",

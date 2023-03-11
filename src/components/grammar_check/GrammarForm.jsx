@@ -58,9 +58,9 @@ const GrammarForm = () => {
             autoFocus
           ></textarea>
           <label className="label">
-            {errors.question ? (
+            {errors.text ? (
               <span className="label-text text-error">
-                {errors.question.message}
+                {errors.text.message}
               </span>
             ) : (
               <span className="label-text text-success">

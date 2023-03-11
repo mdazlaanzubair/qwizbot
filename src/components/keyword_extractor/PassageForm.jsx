@@ -3,34 +3,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAppContext } from "../../contexts/AppContext";
 import { talkToGpt } from "../../helpers/functions/openAiHelper";
-import { useTextTranslationContext } from "../../contexts/TextTranslationContext";
-import languages from "../../helpers/constant/languages";
-import Select from "react-tailwindcss-select";
-import { useState } from "react";
+import { useKeywordContext } from "../../contexts/KeywordContext";
+import { keywordsTrimmer } from "../../helpers/functions/keywordsTrimmer";
 
-const TranslateForm = () => {
+const PassageForm = () => {
   // grabbing global state for processing / loading
   const { setIsLoading } = useAppContext();
 
   // getting global context state
-  const { setTranslatedText } = useTextTranslationContext();
+  const { setKeywords } = useKeywordContext();
 
-  // state to hold selected language
-  const [selectedLang, setSelectedLang] = useState(null);
-
-  // function to run on language selection or change
-  const languageChanged = (value) => {
-    console.log(value);
-    setSelectedLang(value);
-  };
-
-  // schema for grammar prompt form with custom error messages
-  const grammarPromptSchema = yup.object().shape({
+  // schema for keywords prompt form with custom error messages
+  const keywordsPromptSchema = yup.object().shape({
     text: yup
       .string("Passage must be a string.")
       .required("Passage is required.")
-      .min(6, "Passage must be more than 6 characters.")
-      .max(100, "Passage must not be more than 100 characters."),
+      .min(6, "Passage must be more than 6 characters."),
+    //   .max(100, "Passage must not be more than 100 characters."),
   });
 
   // destructuring "useForm" hook and connecting to "yup" using "yupResolver"
@@ -39,35 +28,31 @@ const TranslateForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(grammarPromptSchema),
+    resolver: yupResolver(keywordsPromptSchema),
   });
-  const translateIt = async (formData) => {
+
+  const getKeywords = async (formData) => {
     // changing loading state
     setIsLoading(true);
 
     // using ai helper to get answer
-    const prompt =
-      `Translate this text "${formData.text}" into following language(s) \n\n` +
-      selectedLang.map((lang, index) => `${index + 1}. ${lang.label}\n`);
-
-    const response = await talkToGpt(`${prompt}`);
-    // splitting multi-line response to array
-    const textArray = response.data.choices[0].text.split(/\r?\n/);
-
-    setTranslatedText(textArray);
+    const response = await talkToGpt(
+      `Provide clean array of extracted keywords from this text:\n\n${formData.text}`
+    );
+    // filtering out result / response
+    const result = response.data.choices[0].text;
+    setKeywords(keywordsTrimmer(result));
 
     // changing loading state
     setIsLoading(false);
   };
 
   return (
-    <form className="card w-full" onSubmit={handleSubmit(translateIt)}>
+    <form className="card w-full" onSubmit={handleSubmit(getKeywords)}>
       <div className="card-body">
-        <h2 className="card-title text-3xl font-bold">
-          Multi-Lingual Translation
-        </h2>
+        <h2 className="card-title text-3xl font-bold">Keyword Extractor</h2>
         <p>Just give me the text and see the magic of AI.</p>
-        <div className="form-control mb-5">
+        <div className="form-control">
           <textarea
             {...register("text")}
             className="textarea border-neutral-200"
@@ -101,22 +86,12 @@ const TranslateForm = () => {
             )}
           </label>
         </div>
-        <div className="form-control mb-5">
-          <Select
-            value={selectedLang}
-            onChange={languageChanged}
-            options={languages}
-            isSearchable
-            isMultiple
-            isClearable
-          />
-        </div>
-        <div className="card-actions justify-end">
-          <button className="btn btn-success">Translate</button>
+        <div className="card-actions justify-end mt-5">
+          <button className="btn btn-sm btn-success">Get Keywords</button>
         </div>
       </div>
     </form>
   );
 };
 
-export default TranslateForm;
+export default PassageForm;

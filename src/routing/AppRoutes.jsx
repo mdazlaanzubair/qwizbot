@@ -1,18 +1,27 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "../components/layout/Header";
+// context
 import { useAuth } from "../contexts/AuthContext";
-import GrammarProvider from "../contexts/GrammarContext";
-import QnaProvider from "../contexts/QnaContext";
-import TextTranslationProvider from "../contexts/TextTranslationContext";
+
+// pages
 import Dashboard from "../pages/Dashboard";
 import GrammarCheck from "../pages/GrammarCheck";
 import Home from "../pages/Home";
+import KeywordExtractor from "../pages/KeywordExtractor";
 import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import QuestionAnswer from "../pages/QuestionAnswer";
 import Signup from "../pages/Signup";
 import TranslateText from "../pages/TranslateText";
 import RoutesProtector from "./RoutesProtector";
+
+// component
+import Header from "../components/layout/Header";
+
+// providers
+import KeywordProvider from "../contexts/KeywordContext";
+import QnaProvider from "../contexts/QnaContext";
+import GrammarProvider from "../contexts/GrammarContext";
+import TextTranslationProvider from "../contexts/TextTranslationContext";
 
 const AppRoutes = () => {
   // grabbing user (if any) for protected routes
@@ -54,6 +63,14 @@ const AppRoutes = () => {
             <TextTranslationProvider>
               <TranslateText />
             </TextTranslationProvider>
+          }
+        />
+        <Route
+          path="/keywords"
+          element={
+            <KeywordProvider>
+              <KeywordExtractor />
+            </KeywordProvider>
           }
         />
       </Routes>
