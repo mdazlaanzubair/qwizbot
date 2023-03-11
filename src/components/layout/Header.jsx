@@ -6,11 +6,11 @@ const Header = () => {
   const { user } = useAuth();
 
   return (
-    <div className="navbar bg-base-100 text-neutral-focus rounded-box shadow-lg mb-5">
+    <div className="navbar bg-neutral text-neutral-content rounded-box mb-5">
       <div className="flex-1">
-        <a className="btn btn-ghost normal-case text-xl text-base-content">
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
           Qwizbot
-        </a>
+        </Link>
       </div>
       <div className="flex-none gap-2 mx-4">
         {user ? (

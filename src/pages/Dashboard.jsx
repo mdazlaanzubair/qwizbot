@@ -7,6 +7,7 @@ const Dashboard = () => {
       title: "Q&A",
       desc: "Answer questions based on existing knowledge. Respond with accurate and concise information.",
       tags: ["Answers", "Generation", "Conversation"],
+      url: "/qna",
     },
     {
       title: "Grammar Correction",
