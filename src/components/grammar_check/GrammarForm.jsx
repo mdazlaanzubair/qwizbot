@@ -35,10 +35,10 @@ const GrammarForm = () => {
     setIsLoading(true);
 
     // using ai helper to get answer
-    const text = await talkToGpt(
+    const response = await talkToGpt(
       `Correct this to standard English:\n\n${formData.text}`
     );
-    setCorrectedText(text);
+    setCorrectedText(response.data.choices[0].text);
 
     // changing loading state
     setIsLoading(false);

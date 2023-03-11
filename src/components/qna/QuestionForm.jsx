@@ -35,10 +35,13 @@ const QuestionForm = () => {
     setIsLoading(true);
 
     // using ai helper to get answer
-    const answer = await talkToGpt(
+    const response = await talkToGpt(
       `Answer the following question: \n${formData.question}`
     );
-    setQnas([{ q: formData.question, a: answer }, ...qnas]);
+    setQnas([
+      { q: formData.question, a: response.data.choices[0].text },
+      ...qnas,
+    ]);
 
     // changing loading state
     setIsLoading(false);
