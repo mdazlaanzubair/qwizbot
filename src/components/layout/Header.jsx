@@ -2,15 +2,17 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import servicesList from "../../helpers/constant/services";
 import { supaLogout } from "../../helpers/functions/authenticator";
+import AppLogo from "../../assets/full_logo.png"
 
 const Header = () => {
   const { user } = useAuth();
 
   return (
-    <div className="navbar bg-neutral text-neutral-content rounded-box mb-5">
+    <div className="navbar bg-base-200 text-base-content rounded-box mb-5">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Qwizbot
+        <Link to="/" className="btn btn-ghost">
+          <img className="w-24" src={AppLogo} alt="App Logo" />
+          {/* Qwizbot */}
         </Link>
       </div>
       <div className="flex-none gap-2 mx-4">

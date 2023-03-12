@@ -11,6 +11,7 @@ import Login from "../pages/Login";
 import NotFound from "../pages/NotFound";
 import QuestionAnswer from "../pages/QuestionAnswer";
 import Signup from "../pages/Signup";
+import Login2 from "../pages/Login2";
 import TranslateText from "../pages/TranslateText";
 import RoutesProtector from "./RoutesProtector";
 
@@ -37,6 +38,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} exact />
         <Route path="/*" element={<NotFound />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/login2" element={<Login2 />} />
         <Route path="/login" element={<Login />} />
         <Route element={<RoutesProtector user={user} />}>
           <Route path="/dashboard" element={<Dashboard />} />
