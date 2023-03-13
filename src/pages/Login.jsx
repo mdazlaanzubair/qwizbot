@@ -32,11 +32,11 @@ const Login = () => {
       slug: "github",
       icon: "FaGithubAlt",
     },
-    {
-      title: "Twitter",
-      slug: "twitter",
-      icon: "FaTwitter",
-    },
+    // {
+    //   title: "Twitter",
+    //   slug: "twitter",
+    //   icon: "FaTwitter",
+    // },
     {
       title: "Discord",
       slug: "discord",
