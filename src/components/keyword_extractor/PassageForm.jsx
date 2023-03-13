@@ -18,8 +18,8 @@ const PassageForm = () => {
     text: yup
       .string("Passage must be a string.")
       .required("Passage is required.")
-      .min(6, "Passage must be more than 6 characters."),
-    //   .max(100, "Passage must not be more than 100 characters."),
+      .min(6, "Passage must be more than 6 characters.")
+      .max(1200, "Passage must not be more than 100 characters."),
   });
 
   // destructuring "useForm" hook and connecting to "yup" using "yupResolver"

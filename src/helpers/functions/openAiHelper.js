@@ -8,7 +8,7 @@ const openai = new OpenAIApi(configuration);
 export const talkToGpt = async (
   prompt,
   model = "text-davinci-003",
-  max_tokens = 100
+  max_tokens = 1200
 ) => {
   const response = await openai.createCompletion({
     model,
@@ -26,7 +26,7 @@ export const talkToGpt = async (
 export const codeCompletion = async (
   prompt,
   model = "code-davinci-002",
-  max_tokens = 256
+  max_tokens
 ) => {
   const response = await openai.createCompletion({
     model,

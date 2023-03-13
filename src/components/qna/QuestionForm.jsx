@@ -18,7 +18,7 @@ const QuestionForm = () => {
       .string("Question must be a string.")
       .required("Question is required.")
       .min(6, "Question must be more than 6 characters.")
-      .max(100, "Question must not be more than 100 characters."),
+      .max(256, "Question must not be more than 100 characters."),
   });
 
   // destructuring "useForm" hook and connecting to "yup" using "yupResolver"

@@ -27,36 +27,6 @@ const servicesList = [
     icon: "FaSlackHash",
     url: "/keywords",
   },
-  {
-    title: "Ad Words",
-    desc: "Turn product descriptions into ad script.",
-    tags: ["Generation"],
-    icon: "FaAd",
-  },
-  {
-    title: "Summarizer",
-    desc: "Convert your notes into a summary easily with this service. Perfect for quick review or sharing with others.",
-    tags: ["Transformation", "Generation"],
-    icon: "FaFileSignature",
-  },
-  {
-    title: "Essay outline",
-    desc: "Need help with your research paper? Generate an outline for your topic with this service.",
-    tags: ["Generation"],
-    icon: "FaBorderStyle",
-  },
-  {
-    title: "Reviewer",
-    desc: "Generate restaurant reviews effortlessly with this service.",
-    tags: ["Generation"],
-    icon: "FaCommentDots",
-  },
-  {
-    title: "Interview questions",
-    desc: "Generate interview questions with ease using this service. Perfect for employers or job seekers.",
-    tags: ["Generation"],
-    icon: "FaCompressAlt",
-  },
 ];
 
 export default servicesList;

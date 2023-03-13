@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const TranslateForm = () => {
   // grabbing global state for processing / loading
-  const { setIsLoading } = useAppContext();
+  const { isLoading, setIsLoading } = useAppContext();
 
   // getting global context state
   const { setTranslatedText } = useTextTranslationContext();
@@ -20,8 +20,7 @@ const TranslateForm = () => {
 
   // function to run on language selection or change
   const languageChanged = (value) => {
-    console.log(value);
-    setSelectedLang(value);
+    setSelectedLang(value.label);
   };
 
   // schema for grammar prompt form with custom error messages
@@ -30,7 +29,7 @@ const TranslateForm = () => {
       .string("Passage must be a string.")
       .required("Passage is required.")
       .min(6, "Passage must be more than 6 characters.")
-      .max(100, "Passage must not be more than 100 characters."),
+      .max(1200, "Passage must not be more than 100 characters."),
   });
 
   // destructuring "useForm" hook and connecting to "yup" using "yupResolver"
@@ -41,19 +40,19 @@ const TranslateForm = () => {
   } = useForm({
     resolver: yupResolver(grammarPromptSchema),
   });
+
+  // translation function
   const translateIt = async (formData) => {
     // changing loading state
     setIsLoading(true);
 
     // using ai helper to get answer
-    const prompt =
-      `Translate this text "${formData.text}" into following language(s) \n\n` +
-      selectedLang.map((lang, index) => `${index + 1}. ${lang.label}\n`);
+    const prompt = `Translate the following text:\n\n"${formData.text}" in "${selectedLang}" language.`;
 
     const response = await talkToGpt(`${prompt}`);
+
     // splitting multi-line response to array
     const textArray = response.data.choices[0].text.split(/\r?\n/);
-
     setTranslatedText(textArray);
 
     // changing loading state
@@ -107,12 +106,16 @@ const TranslateForm = () => {
             onChange={languageChanged}
             options={languages}
             isSearchable
-            isMultiple
-            isClearable
           />
         </div>
         <div className="card-actions justify-end">
-          <button className="btn btn-success">Translate</button>
+          <button
+            type="submit"
+            className={`btn btn-success ${isLoading ? "loading" : ""}`}
+            disabled={isLoading ? "disabled" : ""}
+          >
+            Translate
+          </button>
         </div>
       </div>
     </form>

@@ -50,7 +50,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="hero min-h-screen bg-base-200 text-base-content">
+    <div className="hero min-h-screen bg-base-200 text-base-content rounded-box">
       <div className="hero-content text-center">
         <div className="flex flex-col justify-center items-center">
           <div className="content w-full">
