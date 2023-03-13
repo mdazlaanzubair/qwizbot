@@ -22,6 +22,7 @@ import KeywordProvider from "../contexts/KeywordContext";
 import QnaProvider from "../contexts/QnaContext";
 import GrammarProvider from "../contexts/GrammarContext";
 import TextTranslationProvider from "../contexts/TextTranslationContext";
+import Footer from "../components/layout/Footer";
 
 const AppRoutes = () => {
   // grabbing user (if any) for protected routes
@@ -73,6 +74,9 @@ const AppRoutes = () => {
           />
         </Route>
       </Routes>
+
+      {/* footer */}
+      <Footer />
     </Router>
   );
 };

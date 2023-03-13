@@ -6,7 +6,7 @@ const Home = () => {
   const { user } = useAuth();
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen bg-base-200 rounded-box">
       <div className="hero-content flex-col lg:flex-row-reverse px-10 text-center lg:text-left">
         <Animator />
         <div className="max-w-md">
