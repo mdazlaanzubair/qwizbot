@@ -1,18 +1,39 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import servicesList from "../../helpers/constant/services";
+import AppLogo from "../../assets/full_logo.png";
 import { supaLogout } from "../../helpers/functions/authenticator";
-import AppLogo from "../../assets/full_logo.png"
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+
+  // logout function
+  const logout = async () => {
+    const { error } = await supaLogout();
+
+    // on successful login
+    if (!error) {
+      // setting user in global context state
+      setUser(null);
+
+      // troastifying alerts
+      toast.success("You're successfully logged out!");
+
+      // navigate user to the home
+      navigate("/");
+    } else {
+      // troastifying error (if any)
+      toast.error(error.message, {
+        position: "top-center",
+      });
+    }
+  };
 
   return (
     <div className="navbar bg-base-200 text-base-content rounded-box mb-5">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost">
-          <img className="w-24" src={AppLogo} alt="App Logo" />
-          {/* Qwizbot */}
+          <img className="w-24" src={AppLogo} alt="Qwizbot Logo" />
         </Link>
       </div>
       <div className="flex-none gap-2 mx-4">
@@ -36,7 +57,7 @@ const Header = () => {
                 </li>
               ))}
               <li>
-                <a onClick={() => supaLogout()}>Logout</a>
+                <a onClick={() => logout()}>Logout</a>
               </li>
             </ul>
           </div>

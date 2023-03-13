@@ -1,6 +1,6 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import * as FontAwesome from "react-icons/fa";
-import React from "react";
 
 const ServiceCard = ({ service }) => {
   const icon = React.createElement(

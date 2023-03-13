@@ -21,7 +21,6 @@
     "react-icons": "^4.8.0",
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.8.2",
-    "react-social-login-buttons": "^3.6.1",
     "react-tailwindcss-select": "^1.8.5",
     "react-toastify": "^9.1.1",
     "yup": "^1.0.2"

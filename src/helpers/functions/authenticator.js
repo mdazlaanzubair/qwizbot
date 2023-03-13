@@ -1,3 +1,4 @@
+import { useAuth } from "../../contexts/AuthContext";
 import { supabase } from "./supaConfig";
 
 // this file that contain all the function of supabase
