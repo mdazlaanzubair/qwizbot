@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <div className="hero min-h-screen bg-base-200 rounded-box">
-      <div className="hero-content flex-col lg:flex-row-reverse bg-black text-center lg:text-left">
+      <div className="hero-content flex-col lg:flex-row-reverse text-center lg:text-left">
         <div className="w-60 lg:w-full">
           <Animator />
         </div>
