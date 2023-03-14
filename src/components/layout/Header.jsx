@@ -33,7 +33,7 @@ const Header = () => {
     <div className="navbar bg-base-200 text-base-content rounded-box mb-5">
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost">
-          <img className="w-24" src={AppLogo} alt="Qwizbot Logo" />
+          <img className="w-12 lg:w-24" src={AppLogo} alt="Qwizbot Logo" />
         </Link>
       </div>
       <div className="flex-none gap-2 mx-4">
@@ -62,7 +62,10 @@ const Header = () => {
             </ul>
           </div>
         ) : (
-          <Link to="/login" className="btn btn-primary normal-case">
+          <Link
+            to="/login"
+            className="btn btn-xs md:btn-sm lg:btn-md lg:btn-primary normal-case"
+          >
             Get Started
           </Link>
         )}

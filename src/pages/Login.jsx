@@ -54,20 +54,22 @@ const Login = () => {
       <div className="hero-content text-center">
         <div className="flex flex-col justify-center items-center">
           <div className="content w-full">
-            <h1 className="text-5xl font-bold leading-snug">
+            <h1 className="text-xl lg:text-5xl font-bold leading-snug">
               Ready to Explore{" "}
               <span className="text-primary underline underline-offset-8 after:contents after:Hello">
                 Qwizbot
               </span>{" "}
               ?
             </h1>
-            <p className="py-3">
+            <p className="pt-5 pb-2 text-sm font-light">
               Join and experience the full potential of this platform today!
             </p>
-            <p className="pb-6">Login to access the Power of AI.</p>
+            <p className="pb-5 text-sm font-light">
+              Login to access the Power of AI.
+            </p>
           </div>
           <div className="divider">
-            <a href="#social_login" className="w-20 h-20">
+            <a href="#social_login" className="w-10 h-10 lg:w-20 lg:h-20">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

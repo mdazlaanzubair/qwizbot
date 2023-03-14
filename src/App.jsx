@@ -10,7 +10,7 @@ function App() {
   return (
     <div
       id="App"
-      className="App relative main-website-holder m-0 p-20 min-h-screen font-default"
+      className="App relative main-website-holder m-0 p-10 lg:p-20 min-h-screen font-default"
       data-theme={isDarkModeOn ? "night" : "winter"}
     >
       {/* theme toggler */}
