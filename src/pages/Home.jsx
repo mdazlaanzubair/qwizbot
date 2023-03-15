@@ -11,12 +11,18 @@ const Home = () => {
         <div className="w-60 lg:w-full">
           <Animator />
         </div>
-        <div className="max-w-md">
-          <h1 className="text-3xl lg:text-5xl font-bold">Box Office News!</h1>
+        <div className="max-w-md ppl-0 lg:pl-10">
+          <h1 className="text-lg lg:text-3xl font-bold">
+            Are you tired of sifting through pages of text to find the
+            information you need?
+          </h1>
           <p className="py-6 text-sm font-light lg:text-base">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            Look no further! This AI-powered software simplifies the process by
+            finding answers and summarizing text quickly and efficiently.
+          </p>
+          <p className="pb-6 text-sm font-light lg:text-base">
+            Take your productivity to the next level with{" "}
+            <span className="text-primary font-bold">Qwizbot!</span>
           </p>
 
           {user ? (
